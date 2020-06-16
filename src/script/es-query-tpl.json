@@ -1,0 +1,47 @@
+{
+  "group-1-1":{
+    "url": "http://47.111.239.195:9200/logstash*/_search?rest_total_hits_as_int=true&ignore_throttled=true",
+    "queryTpl": "{'aggs':{'2':{'date_histogram':{'field':'@timestamp','interval':'${interval}','time_zone':'Asia/Shanghai','min_doc_count':1}}},'size':0,'_source':{'excludes':[]},'stored_fields':['*'],'script_fields':{},'docvalue_fields':[{'field':'@timestamp','format':'date_time'}],'query':{'bool':{'must':[{'match_phrase':{'level':{'query':'ERROR'}}},{'range':{'@timestamp':{'format':'${format}','gte':'${startTime}','lte':'${endTime}'}}}],'filter':[{'match_all':{}}],'should':[],'must_not':[]}},'timeout':'30000ms'}",
+    "content-type": "application/json",
+    "method": "POST",
+    "title":"ERROR-统计图",
+    "default-type":"line",
+    "descrption": "即时滚动,折线: X-时间,Y-错误数量"
+  },
+  "group-1-2":{
+    "url": "http://47.111.239.195:9200/_msearch?rest_total_hits_as_int=true&ignore_throttled=true",
+    "queryTpl": "{'index':'logstash*','ignore_unavailable':true}\r\n{'aggs':{'2':{'date_histogram':{'field':'@timestamp','interval':'${interval}','time_zone':'Asia/Shanghai','min_doc_count':1},'aggs':{'3':{'terms':{'field':'fields.server_name.keyword','order':{'_count':'desc'},'size':5}}}}},'size':0,'_source':{'excludes':[]},'stored_fields':['*'],'script_fields':{},'docvalue_fields':[{'field':'@timestamp','format':'date_time'}],'query':{'bool':{'must':[{'match_phrase':{'level':{'query':'ERROR'}}},{'range':{'@timestamp':{'format':'${format}','gte':'${startTime}','lte':'${endTime}'}}}],'filter':[{'match_all':{}}],'should':[],'must_not':[]}},'timeout':'30000ms'}\r\n",
+    "content-type": "application/x-ndjson",
+    "method": "POST",
+    "title":"ERROR-统计图-服务",
+    "default-type":"line",
+    "descrption": "即时滚动,折线: M-ServiceName,X-时间,Y-错误数量"
+  },
+  "group-1-3":{
+    "url": "http://47.111.239.195:9200/_msearch?rest_total_hits_as_int=true&ignore_throttled=true",
+    "queryTpl": "{'index':'logstash*','ignore_unavailable':true}\r\n{'aggs':{'3':{'terms':{'field':'fields.server_id.keyword','order':{'_count':'desc'},'size':5},'aggs':{'2':{'date_histogram':{'field':'@timestamp','interval':'${interval}','time_zone':'Asia/Shanghai','min_doc_count':1}}}}},'size':0,'_source':{'excludes':[]},'stored_fields':['*'],'script_fields':{},'docvalue_fields':[{'field':'@timestamp','format':'date_time'}],'query':{'bool':{'must':[{'match_phrase':{'level':{'query':'ERROR'}}},{'match_phrase':{'fields.server_name':{'query':'${serverName}'}}},{'range':{'@timestamp':{'format':'${format}','gte':'${startTime}','lte':'${endTime}'}}}],'filter':[{'match_all':{}}],'should':[],'must_not':[]}},'timeout':'30000ms'}\r\n",
+    "content-type": "application/x-ndjson",
+    "method": "POST",
+    "title":"ERROR-统计图-服务节点",
+    "default-type":"line",
+    "descrption": "即时滚动,折线: M-ServerId,X-时间,Y-错误数量"
+  },
+  "group-4-1":{
+    "url": "http://47.111.239.195:9200/_msearch?rest_total_hits_as_int=true&ignore_throttled=true",
+    "queryTpl": "{'index':'logstash*','ignore_unavailable':true}\r\n{'aggs':{'2':{'terms':{'field':'fields.server_name.keyword','order':{'_count':'desc'},'size':5}}},'size':0,'_source':{'excludes':[]},'stored_fields':['*'],'script_fields':{},'docvalue_fields':[{'field':'@timestamp','format':'date_time'}],'query':{'bool':{'must':[{'match_phrase':{'level':{'query':'ERROR'}}},{'range':{'@timestamp':{'format':'${format}','gte':'${startTime}','lte':'${endTime}'}}}],'filter':[{'match_all':{}}],'should':[],'must_not':[]}},'timeout':'30000ms'}\r\n",
+    "content-type": "application/x-ndjson",
+    "method": "POST",
+    "title":"ERROR-当天错误-服务",
+    "default-type":"pie",
+    "descrption": "饼图,y-当天错误,x-serviceName"
+  },
+  "group-4-2":{
+    "url": "http://47.111.239.195:9200/_msearch?rest_total_hits_as_int=true&ignore_throttled=true",
+    "queryTpl": "{'index':'logstash*','ignore_unavailable':true}\r\n{'aggs':{'2':{'terms':{'field':'fields.server_id.keyword','order':{'_count':'desc'}}}},'size':0,'_source':{'excludes':[]},'stored_fields':['*'],'script_fields':{},'docvalue_fields':[{'field':'@timestamp','format':'date_time'}],'query':{'bool':{'must':[{'match_phrase':{'level':{'query':'ERROR'}}},{'match_phrase':{'fields.server_name':{'query':'${serverName}'}}},{'range':{'@timestamp':{'format':'${format}','gte':'${startTime}','lte':'${endTime}'}}}],'filter':[{'match_all':{}}],'should':[],'must_not':[]}},'timeout':'30000ms'}\r\n",
+    "content-type": "application/x-ndjson",
+    "method": "POST",
+    "title":"ERROR-当天错误-服务节点",
+    "default-type":"pie",
+    "descrption": "饼图,y-当天错误,x-ServerId"
+  }
+}

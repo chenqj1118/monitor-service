@@ -1,0 +1,73 @@
+html, body{
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+body{
+  background: url('../images/bg.jpg');
+}
+#app, .el-container{
+  height: 100%;
+}
+a{
+  text-decoration: none;
+}
+li{
+  list-style: none;
+}
+.el-header{
+  background: #fff;
+  -webkit-box-shadow: 0 2px 2px -1px rgba(152, 162, 179, 0.3), 0 1px 5px -2px rgba(152, 162, 179, 0.3);
+  box-shadow: 0 2px 2px -1px rgba(152, 162, 179, 0.3), 0 1px 5px -2px rgba(152, 162, 179, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  border-bottom: 1px solid #D3DAE6;
+  .logo{
+    border-right: 1px solid #eee;
+    float: left;
+    margin-right: 20px;
+    padding: 0 10px;
+  }
+  .el-breadcrumb{
+    line-height: 60px;
+  }
+  .bknav{
+    position: fixed;
+    left: 0;
+    top: 60px;
+    bottom: 0;
+    background: #fff;
+    border-right: solid 1px #e6e6e6;
+    .el-menu{
+      border-right: 0;
+    }
+  }
+}
+
+.el-main{
+  width:98%;
+  height: 100%;
+  padding: 60px 30px 30px;
+  overflow-x: hidden;
+  .searchBox{
+    padding: 10px;
+    text-align: right;
+  }
+  .myChart{
+    background: #fff;
+    padding: 30px;
+    margin-bottom: 30px;
+    position: relative;
+    box-shadow: 0 0 10px #333;
+    .chartBtns{
+      position: absolute;
+      top: -20px;
+      right: 20px;
+    }
+  }
+}
